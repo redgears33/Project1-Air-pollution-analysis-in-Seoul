@@ -27,7 +27,6 @@ from sklearn.preprocessing import StandardScaler
 X = data.values[:,1:]
 X = np.nan_to_num(X)
 Clus_dataSet = StandardScaler().fit_transform(X)
-Clus_dataSet
 
 clusterNum = 5
 k_means = KMeans(init = "k-means++", n_clusters = clusterNum, n_init = 12)
