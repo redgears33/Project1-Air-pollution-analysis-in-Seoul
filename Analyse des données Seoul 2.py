@@ -20,35 +20,33 @@ pd.to_numeric(data['Average value'])
 data['Item code'].apply(str)
 
 data = data.loc[data['Instrument status'] == 0]
-
 data.head(10)
 
-from sklearn.preprocessing import StandardScaler
-X = data.values[:,1:]
-X = np.nan_to_num(X)
-Clus_dataSet = StandardScaler().fit_transform(X)
+print(data)
 
-clusterNum = 5
-k_means = KMeans(init = "k-means++", n_clusters = clusterNum, n_init = 12)
-k_means.fit(X)
-labels = k_means.labels_
-print(labels)
 
-data["Clus_km"] = labels
-data.groupby('Clus_km').mean()
-print(data.head(10))
+# J'affiche les stations sur une map en ajoutant le nom de celles-ci
 
-import plotly.express as px
-data = px.data.iris()
-fig = px.scatter_3d(data, x='sepal_length', y='sepal_width', z='petal_width',
-              color='species')
+fig = px.scatter_mapbox(localisation, lat="Latitude", lon="Longitude", hover_name="Station name(district)", hover_data=["Station name(district)"],
+                        color_discrete_sequence=["blue"], zoom=9, height=300)
+fig.update_layout(mapbox_style="open-street-map")
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 fig.show()
 
+
 # JUSQUE ICI OK
-# Je génère une map de Seoul en HTML
 
-import folium
-c= folium.Map(location=[37.566535, 126.9779692])
-c.save('MAP_SEOUL.html')
+#from sklearn.preprocessing import StandardScaler
+#X = data.values[:,1:]
+#X = np.nan_to_num(X)
+#Clus_dataSet = StandardScaler().fit_transform(X)
 
-# Reste à trouver comment avoir les colones lat et long en fonction du station code
+#clusterNum = 5
+#k_means = KMeans(init = "k-means++", n_clusters = clusterNum, n_init = 12)
+#k_means.fit(X)
+#labels = k_means.labels_
+#print(labels)
+
+#data["Clus_km"] = labels
+#data.groupby('Clus_km').mean()
+#print(data.head(10))
