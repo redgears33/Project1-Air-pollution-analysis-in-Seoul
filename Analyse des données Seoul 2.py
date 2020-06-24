@@ -45,8 +45,6 @@ fig = px.scatter_3d(data, x='sepal_length', y='sepal_width', z='petal_width',
               color='species')
 fig.show()
 
-data['Clus_km'].value_counts(ascending=True)
-
 # JUSQUE ICI OK
 # Je génère une map de Seoul en HTML
 
